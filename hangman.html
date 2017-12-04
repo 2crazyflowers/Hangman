@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman</title>
+</head>
+<body>
+
+	<div id="game">
+		<h3>Look at the console log to see what is happening</h3>
+	</div>
+	<script type="text/javascript">
+
+		//You need to script to html instructions on how to play the game
+
+
+
+
+		//You would need an array of words
+
+
+		var computerChoices = ["flowers", "children", "apartment", "theater", "building"];
+		var userChoices = "";
+
+		//list of all variables		
+
+		// var userChoices: 0;
+		// var lettersChosen: 0;
+		// var remainingChoices: 0;
+
+		//You would need the computer to randomly pick a word
+		var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+		console.log("Computer word choice: " + computerGuess);
+
+		//You need to have the computer take the word and make it into an array 
+		var lettersOfWord = [""];
+		lettersOfWord = computerGuess.split("");
+		console.log(lettersOfWord);
+
+		//you need to have the new array put underscores for number of letters in the array use: var arrayLength = myFarm.length;
+
+		//you need to have the user input their letter choice
+		// var userChoices = prompt("Press a letter to see if it is part of the word"); cannot use prompt and ask for user input through event
+
+		    // This function is run whenever the user presses a key.
+    	document.onkeyup = function(event) {
+			
+			//determins which key was pressed
+			var userChoices = String.fromCharCode(event.keyCode).toLowerCase();
+			
+			
+			//logs the userChoices to console
+			console.log(userChoices);
+
+
+		//you need to have the computer take the user choice and review each letter in the array to see if it is in the word
+		//try using indexof
+		var find = lettersOfWord.indexOf(userChoices);
+		console.log(find)
+
+		//not sure how to str.charAt(0);
+		
+		//you need to have the computer log the word either into the word or you need to have the computer log it as an unusable letter on the screen and log one less of guesses
+
+		//
+		};
+
+
+
+	</script>
+
+</body>
+</html>
