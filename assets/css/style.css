@@ -1,0 +1,27 @@
+body {
+	background-color: blue;
+}
+
+h1 {
+	text-align: center;
+	margin: 20px;
+	color: yellow;
+	font-weight: bold;
+}
+
+.left {
+	float: left;
+	background-color: #1dff00;
+	height: 400px;
+}
+
+img {
+	margin: 40px 20px;
+	height: 80%;
+}
+
+.right {
+	float: right;
+	background-color: #fc1bb9;
+	height: 400px;
+}
