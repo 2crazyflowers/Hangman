@@ -3,25 +3,40 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Hangman Game</title>
+
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|VT323" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 <body>
 	<div class="container">
+
 		<h1>Hangman Game</h1>
 		<div class="left  col-md-6 col-sm-6">
 			<img src="assets/images/hangmanimg.jpg">
 		</div>
 		<div class="right col-md-6 col-sm-6">
 			<h4>Press a letter to start</h4>
-			<p id = "wins-score"></p>
 			<!-- Need to show wins, current word (with dashes), # of guesses to start, # guesses left, words already chosen -->
 			<!-- Need to have music start if the player won -->
-			<p id="current-word"></p>
-			<p id="letters-used"></p>
-			<p id="remaining-guesses"></p>
+			<p>Your wins: </p>
+			<p id="wins"></p>
+			<p>Your loses: </p>
+			<p id="loses"></p>
+			<p>Current Word:</p>
+			<p id="dashes"></p>
+			<p>Your guesses: </p>
+			<p id="lettersChosen"></p>
+			<p>Number of guesses left: </p>
+			<p id="guesses"></p>
+			<br>			
+			<audio controls>
+				<source src="assets/Girls Just Want to Have Fun.mp3" type="audio/mpeg">
+				Your browser does not support the audio element.
+			</audio>
+			<script src="assets/javascript/game.js"></script>
 		</div>
 	</div>
 </body>

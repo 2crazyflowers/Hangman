@@ -12,6 +12,10 @@
 			<p>Your wins: </p>
 			<p id="wins"></p>
 			<br>
+			<p>Your loses: </p>
+			<p id="loses"></p>
+			<br>
+
 			<p>Current Word:</p>
 			<p id="dashes"></p>
 			<br>
@@ -35,13 +39,12 @@
 
 		var wordOptions = ["flowers", "children", "apartment", "theater", "building"];
 		var userChoices = "";
-		// var newArray = [];
 		var lettersChosen = [];
 		var lettersWorked = [];
 		var lettersNotWorked = [];
-		// var userChoices: 0;
-		// var lettersChosen: 0;
-		// var remainingChoices: 0;
+		var guesses = 13;
+		var loses = 0;
+
 
 		//You would need the computer to randomly pick a word
 		var wordChosen = wordOptions[Math.floor(Math.random() * wordOptions.length)];
@@ -53,55 +56,44 @@
 
 		//you need to have the new array put underscores for number of letters in the array use: var arrayLength = myFarm.length;
 
-		// numberOfUnderScores = underScore.push("_") * wordChosen.length;
-		//console.log(numberOfUnderScores);
 		var underScore = [];
 		for (var x = 0; x < wordChosen.length; x++) {
 			underScore.push("_");
 			console.log(underScore);
 		}
+
+		//prints underScore for first time to html
 		document.querySelector("#dashes").innerHTML = underScore;
-		document.write(underScore);
-		//don't think I need the following:
-			// underScore.push("_");
-			// console.log(underScore.join(" "));
+		
 
-		//you need to have the user input their letter choice - it needs to be done via html instructions cannot use below
-		// var userChoices = prompt("Press a letter to see if it is part of the word"); cannot use prompt and ask for user input through event
+		//you need to have the user input their letter choice - it needs to be done via html instructions 
 
-		    // This function is run whenever the user presses a key.
+		// This function is run whenever the user presses a key.
     	document.onkeyup = function(event) {
 			
-			// //determins which key was pressed
+			//determins which key was pressed
 			var userChoices = String.fromCharCode(event.keyCode).toLowerCase();
 			
 			
-			// //logs the userChoices to console
+			//logs the userChoices to console
 			console.log(userChoices);
 
 
 		//you need to have the computer take the user choice and review each letter in the array to see if it is in the word
 		//try using indexof
 		
-			for (var i = 0; i <= wordChosen.length; i++) {
+			for (var i = 0; i < wordChosen.length; i++) {
 				var find = lettersOfWord.indexOf(userChoices[i]);
-				console.log("Yes, the word has an " + userChoices + " and the index is: " + find);
-
-				if (find >= 0) {
-					underScore[find] = userChoices;
+				if ( find >= 0 ) {
+					console.log("Yes, the word has an " + userChoices + " and the index is: " + find);
+					underScore[find] = userChoices
  					underScore.splice(find, 1, userChoices);
-					//the below is working except it is not updating the lettersChosen x2  
-					console.log(underScore);
-					
-					//everytime a new letter is chosen I need the new letter to be added to the letterChosen array which is not happening if variables are declared inside the loop - so I took them out.
-					// lettersWorked.push(userChoices);
-					// console.log(lettersWorked);
-					// console.log(lettersWorked.length);	
-
-					//how do I handle getting double letters in array 
-				//} else if ((find = -1) && (i = wordChosen.length)) {
-				//	break;
+					document.querySelector("#dashes").innerHTML = underScore;
+					console.log(underScore);	
+				
 				} else {
+				// this is where I was working to see if I coulf figure out how to make it push through all the letters
+				// if (i = wordChosen.length)
 					lettersChosen.push(userChoices);
 					console.log(lettersChosen);
 					console.log(lettersChosen.length);
@@ -111,95 +103,19 @@
 
 					//write to html choices left
 					//document.write("You have" + (13 - lettersChosen.length) + " guesses left");
-					document.querySelector("#guesses").innerHTML = (13 - lettersChosen.length);
-					
-					
+					var guessesRemaining = guesses - lettersChosen.length;
+					document.querySelector("#guesses").innerHTML = (guessesRemaining);
 					break;
-					}
+
+					
+
+
 				}
+				}	
+				
+			}
+//this file does not yet return multiple letters in an array
 
-			
-			// }
-
-				//if you already chose that letter it should not come up as another 
-				//if letter chosen does not match to array need to log it to lettersChosen
-				//tried this outside of var 1=0 loop for wordChosen.length but I get a repeating letter in lettersChosen, trying it inside loop, if you do inside that loop it returns multiples of one letter, so must be outside that loop
-
-				// if (find = -1) {
-				// 	lettersChosen.push(userChoices);
-				// 	console.log(lettersChosen);
-				// 	console.log(lettersChosen.length);
-				// }
-		}
-			
-
-		//have to continue checking until the array is completely searched
-			//have letter of word replace letter in array
-			//have choice number decrease by one
-
-		
-		
-
-		//not sure how to str.charAt(0);
-		
-		//you need to have the computer log the word either into the word or you need to have the computer log it as an unusable letter on the screen and log one less of guesses
-		// userChosenLetters = userChosenLetters.push(userChoices);
-		// console.log(userChosenLetters);
-		//
-	   
-
-			 // // Function to render questions.
-			 //  function renderQuestion() {
-			 //    // If there are still more questions, render the next one.
-			 //    if (questionIndex <= (questionsArray.length - 1)) {
-			 //      document.querySelector("#question").innerHTML = questionsArray[questionIndex][0];
-			 //    }
-			 //    // If there aren't, render the end game screen.
-			 //    else {
-			 //      document.querySelector("#question").innerHTML = "Game Over!";
-			 //      document.querySelector("#score").innerHTML = "Final Score: " + score + " out of " + questionsArray.length;
-			 //    }
-			 //  }
-
-			 //  // Function that updates the score...
-			 //  function updateScore() {
-			 //    document.querySelector("#score").innerHTML = "Score: " + score;
-			 //  }
-		// 1. Create code that "grabs" the div with the matching id (#drink-options);
-// 	    var targetDiv = document.getElementById("drink-options");
-
-	   
-// 	    // ...
-
-
-//     // 2. Create a for loop that creates HTML content of all the drinks using JavaScript.
-//     // HINT: You will need to use each of the following methods: createElement, innerHTML, appendChild
-//     // ...
-
-// 	    for (var i = 0; i < drinkList.length; i++) {
-// 	      var newDiv = document.createElement("div");
-// 	      newDiv.innerHTML = drinkList[i];
-// 	      targetDiv.appendChild(newDiv);
-// 	    }
-
-// 		//After the user wins/loses the game should automatically choose another word and make the user play it.
-// //OR----------------
-//  	function renderQuestion() {
-//         // If there are still more questions, render the next one.
-//         if (questionIndex <= (questionsArray.length - 1)) {
-//           document.querySelector("#question").innerHTML = questionsArray[questionIndex][0];
-//         }
-//         // If there aren't, render the end game screen.
-//         else {
-//           document.querySelector("#question").innerHTML = "Game Over!";
-//           document.querySelector("#score").innerHTML = "Final Score: " + score + " out of " + questionsArray.length;
-//         }
-//       }
-
-//       // Function that updates the score...
-//       function updateScore() {
-//         document.querySelector("#score").innerHTML = "Score: " + score;
-//       }
 	</script>
 
 </body>

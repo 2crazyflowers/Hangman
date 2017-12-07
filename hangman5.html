@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman</title>
+</head>
+<body>
+
+	<div id="game">
+		<h3>Look at the console log to see what is happening</h3>
+
+		<div id="game-info">
+			<p>Your wins: </p>
+			<p id="wins"></p>
+			<br>
+			<p>Your loses: </p>
+			<p id="loses"></p>
+			<br>
+
+			<p>Current Word:</p>
+			<p id="dashes"></p>
+			<br>
+			<p>Your guesses: </p>
+			<p id="lettersChosen"></p>
+			<br>
+			<p>Number of guesses left: </p>
+			<p id="guesses"></p>
+			
+		</div>
+	</div>
+	<script type="text/javascript">
+
+		//You need to script to html instructions on how to play the game
+
+
+
+
+		//You would need an array of words
+
+
+		var wordOptions = ["flowers", "children", "apartment", "theater", "building"];
+		var userChoices = "";
+		var lettersChosen = [];
+		var lettersWorked = [];
+		var lettersNotWorked = [];
+		var guesses = 13;
+		var loses = 0;
+
+
+		//You would need the computer to randomly pick a word
+		var wordChosen = wordOptions[Math.floor(Math.random() * wordOptions.length)];
+		console.log("Word chosen: " + wordChosen);
+
+		//You need to have the computer take the word and make it into an array 
+		var lettersOfWord = wordChosen.split("");
+		console.log(lettersOfWord);
+
+		//you need to have the new array put underscores for number of letters in the array use: var arrayLength = myFarm.length;
+
+		var underScore = [];
+		for (var x = 0; x < wordChosen.length; x++) {
+			underScore.push("_");
+			console.log(underScore);
+		}
+
+		//prints underScore for first time to html
+		document.querySelector("#dashes").innerHTML = underScore;
+		
+
+		//you need to have the user input their letter choice - it needs to be done via html instructions 
+
+		// This function is run whenever the user presses a key.
+    	document.onkeyup = function(event) {
+			
+			//determins which key was pressed
+			var userChoices = String.fromCharCode(event.keyCode).toLowerCase();
+			
+			
+			//logs the userChoices to console
+			console.log(userChoices);
+
+
+		//you need to have the computer take the user choice and review each letter in the array to see if it is in the word
+		//try using indexof
+		
+			for (var i = 0; i <= wordChosen.length; i++) {
+				var find = lettersOfWord.indexOf(userChoices[i]);
+
+					console.log("Yes, the word has an " + userChoices + " and the index is: " + find);
+					underScore[find] = userChoices;
+ 					underScore.splice(find, 1, userChoices);
+					document.querySelector("#dashes").innerHTML = underScore;
+					console.log(underScore);	
+				}
+
+				lettersChosen.push(userChoices);
+				console.log(lettersChosen);
+				console.log(lettersChosen.length);
+				//write to html letters chosen
+				document.querySelector("#lettersChosen").innerHTML = lettersChosen;
+				// document.write(lettersChosen);
+
+				//write to html choices left
+				//document.write("You have" + (13 - lettersChosen.length) + " guesses left");
+				var guessesRemaining = guesses - lettersChosen.length;
+				document.querySelector("#guesses").innerHTML = (guessesRemaining);
+				// break;
+
+		}
+
+//this file does not yet return multiple letters in an array
+
+	</script>
+
+</body>
+</html>
