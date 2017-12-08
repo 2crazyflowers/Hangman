@@ -5,7 +5,7 @@ body {
 h1 {
 	font-family: 'Press Start 2P', cursive;
 	text-align: center;
-	margin: 20px;
+	margin: 16px;
 	color: yellow;
 	font-weight: bold;
 }
@@ -13,7 +13,7 @@ h1 {
 .left {
 	float: left;
 	background-color: #1dff00;
-	height: 500px;
+	height: 600px;
 }
 
 img {
@@ -24,16 +24,16 @@ img {
 .right {
 	float: right;
 	background-color: #fc1bb9;
-	height: 500px;
+	height: 600px;
 }
 
 h4 {
 	font-family: 'Press Start 2P', cursive;
-	font-size: 20px;
+	font-size: 18px;
 	margin: 20px;
 }
 
 p {
 	font-family: 'VT323', monospace;
-	font-size: 24px;
+	font-size: 20px;
 }
