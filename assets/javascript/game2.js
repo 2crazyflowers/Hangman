@@ -13,6 +13,9 @@ var guesses=13;
 var lettersChosen = [];
 // var lettersWorked = [];
 var guessesRemaining = guesses - lettersChosen.length;
+var wordChosen = "";
+var lettersofWord = [];
+var underScore = [];
 
 
 
@@ -50,14 +53,14 @@ function reviewForMatch() {
 //you need to have the computer take the user choice and review each letter in the array to see if it is in the word
 //find is where the letter from userChoices matches in the wordChosen
 //errors of wordChosen not being found
-	var wordChosen = word;
-	var lettersOfWord = word.split("");
-	console.log(word);
-	for (var i = 0; i < word.length; i++) {
+
+	var lettersOfWord = wordChosen.split("");
+	console.log(wordChosen);
+	for (var i = 0; i < wordChosen.length; i++) {
 		var find = lettersOfWord.indexOf(userChoice[i]);
 		//prints to console if letter matches any letters in wordChosen array and where in array it is
 		underScore[find] = userChoice;
-			underScore.splice(find, 1, userChoices);
+			underScore.splice(find, 1, userChoice);
 		console.log("Yes, the word has an " + userChoice + " and the index is: " + find);
 		console.log(underScore);
 	document.querySelector("#dashes").innerHTML = underScore;
@@ -114,7 +117,7 @@ document.onkeyup = function(event) {
 	console.log(userChoices);
 
 
-	reviewMatch();
+	reviewForMatch();
 }
 
 
