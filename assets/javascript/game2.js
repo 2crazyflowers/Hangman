@@ -1,106 +1,152 @@
-alert("Test");
-//You need to script to html instructions on how to play the game
+// alert("Test");
+// //You need to script to html instructions on how to play the game
 
 
 //You would need an array of words
-var wordOptions = ["apartment", "theater", "apartment", "building"];
-
-//other variables and that need to be declared
+var wordOptions = ["apartment", "theater", "pyramid", "building", "elephant"];
 var userChoice = "";
 var loses=0;
 var wins=0;
 var guesses=13;
 var lettersChosen = [];
-// var lettersWorked = [];
-var guessesRemaining = guesses - lettersChosen.length;
 var wordChosen = "";
-var lettersofWord = [];
+var lettersOfWord = [];
 var underScore = [];
+var lengthWord = 0;
 
-
-
+  
 
 function gameOn() {
-//The computer randomly picks a word from the wordOption array
+	//reset variables here instead of at winsLossCounter or else won't work
+	var guesses = 13;
+	// var lettersChosen = [];
+	// var userChoice = "";
+	// // var wordChosen = "";
+	// var underScore = [];
+	// var lengthWord = 0;
+	
+	//The computer randomly picks a word from the wordOption array
 	wordChosen = wordOptions[Math.floor(Math.random() * wordOptions.length)];
-	console.log("Word chosen: " + wordChosen);
+	//console.log("Word chosen: " + wordChosen);
 
 	//The computer takes the wordChosen and make turns it into an array 
-	var lettersOfWord = wordChosen.split("");
-	console.log(lettersOfWord);
+	lettersOfWord = wordChosen.split("");
+	// console.log(lettersOfWord);
 
 	//Have the lettersOfWord array replace the letters with underscores to match number of letters
-	var underScore = [];
-	var lengthWord = wordChosen.length
+	// var underScore = [];
+	lengthWord = wordChosen.length
 	for (var x = 0; x < lengthWord; x++) {
 		underScore.push("_");
-		console.log(underScore);
+		// console.log(underScore);
 	}
 	//issues not being able to call variables inside another function
 	//found a way to call one variable, but not 2, so it sees
 	//word chosen, but not lettersofWord
-	reviewForMatch(wordChosen);
+	// reviewForMatch(wordChosen);
 
 	//print items to html for first time
-	document.querySelector("#dashes").innerHTML = underScore;
+	document.querySelector("#dashes").innerHTML = underScore.join(" ");
 	document.querySelector("#loses").innerHTML = loses;
 	document.querySelector("#wins").innerHTML = wins;
 	document.querySelector("#guesses").innerHTML = guesses;
-	
+	document.querySelector("#lettersChosen").innerHTML = lettersChosen;
+	console.log(wordChosen);
 }
 
-function reviewForMatch() {
+function reviewForMatch(letter) {
+
+	console.log("It is checking for match");
+	// console.log(wordChosen);
+	// console.log(lengthWord);
+	// console.log(lettersOfWord); 
+
+//not sure how to do the sound part
+	// var SoundUDidIt = (function beep() {
+	// 	var snd = new Audio("../youdidit.m4a");
+	// 	return function() {     
+	//     snd.play(); 
+	//   	}
+	// });
+  
+	// var playSoundAwww = (function beep() {
+	// 	var snd = new Audio("../Girls.mp3");
+	// 	return function() {     
+	// 	snd.play(); 
+	// 	}
+	// });  
+
+
 //you need to have the computer take the user choice and review each letter in the array to see if it is in the word
 //find is where the letter from userChoices matches in the wordChosen
 //errors of wordChosen not being found
+	var letterInWord = false;
 
-	var lettersOfWord = wordChosen.split("");
-	console.log(wordChosen);
-	for (var i = 0; i < wordChosen.length; i++) {
-		var find = lettersOfWord.indexOf(userChoice[i]);
-		//prints to console if letter matches any letters in wordChosen array and where in array it is
-		underScore[find] = userChoice;
-			underScore.splice(find, 1, userChoice);
-		console.log("Yes, the word has an " + userChoice + " and the index is: " + find);
+	for (var i = 0; i < lengthWord; i++) {
+
+		if (wordChosen[i] === letter) {
+			letterInWord = true;
+			console.log(letterInWord);
+		}
+	} 
+
+	if (letterInWord) {
+		for (var j = 0; j < lengthWord; j++) {
+			if (wordChosen[j] === letter) {
+				underScore[j] = letter;
+			}
+		}
+		lettersChosen.push(letter);
 		console.log(underScore);
-	document.querySelector("#dashes").innerHTML = underScore;
+
+		document.querySelector("#dashes").innerHTML = underScore.join(" ");
+		document.querySelector("#lettersChosen").innerHTML = lettersChosen;
+		console.log(lettersChosen);
+		//playSoundUDidIt();
+
+
 	}
 
+	else {
+		console.log("letter not in word");
 		//pushes userChoice (users letter input) into array lettersChosen and prints to html
-		lettersChosen.push(userChoice);
+		lettersChosen.push(letter);
 		console.log(lettersChosen);
-		console.log(lettersChosen.length);
 		//write to html letters chosen
 		document.querySelector("#lettersChosen").innerHTML = lettersChosen;
 		// document.write(lettersChosen);
 
 		//write to html choices left
 		//document.write("You have" + (13 - lettersChosen.length) + " guesses left");
-		document.querySelector("#guesses").innerHTML = (13 - lettersChosen.length);
-		
-		// break;
+		guesses--;
+		document.querySelector("#guesses").innerHTML = (guesses);
+		//playSoundAwww();
 	}
+}
+
+
 
 function winLossCounter() {
+	console.log("Do we ever get to counter?");
+	console.log(guesses);
 	//what is counter for knowing that no more dashes in array???
-	if (guessesRemaining > 0 && lettersOfWord == underScore) {
+	if (lettersOfWord.toString() === underScore.toString()) {
+	//this is better underScore.indexOf("_") == -1)
+		console.log("are we getting to won?");
+		alert("You've won!");
 		wins++;
-		var guesses = 13;
-		var lettersChosen = "";
-		var userChoice = "";
 		document.querySelector("#wins").innerHTML = wins;
+		gameOn();
 	}
 
-	if (guessesRemaining = 0) {
+	else if (guesses === 0) {
+		console.log("are we getting to loss?");
+		alert("You've lost, sad face.");
 		loses++;
-		var guesses = 13;
-		var lettersChosen = "";
-		var userChoice = "";
 		document.querySelector("#loses").innerHTML = loses;
-
+		gameOn();
 	}
 }	
-
 
 
 //call function to work game
@@ -111,14 +157,16 @@ gameOn();
 document.onkeyup = function(event) {
 	
 	// //determins which key was pressed
-	var userChoices = String.fromCharCode(event.keyCode).toLowerCase();
+	var userChoice = String.fromCharCode(event.keyCode).toLowerCase();
 	
 	// //logs the userChoices to console
-	console.log(userChoices);
+	console.log(userChoice);
+
+	reviewForMatch(userChoice);
+
+	winLossCounter();
+
+};
 
 
-	reviewForMatch();
-}
-
-
-
+//do with in word match instead
